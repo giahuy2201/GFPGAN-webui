@@ -1,0 +1,14 @@
+---
+version: '3.6'
+services:
+  gfpgan:
+    # build: .
+    image: giahuy2201/gfpgan-webui
+    container_name: gfpgan
+    restart: unless-stopped
+    volumes:
+      - ./gfpgan:/gfpgan-webui/gfpgan
+      - ./models:/gfpgan-webui/models
+      - ./outputs:/gfpgan-webui/outputs
+    ports:
+      - 7860:7860
