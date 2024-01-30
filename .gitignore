@@ -1,0 +1,11 @@
+*.env
+*.log
+*.lock
+*.DS_Store
+__pycache__
+.python-version
+gfpgan
+inputs
+outputs
+models
+flagged
