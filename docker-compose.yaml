@@ -2,7 +2,6 @@
 version: '3.6'
 services:
   gfpgan:
-    # build: .
     image: giahuy2201/gfpgan-webui
     container_name: gfpgan
     restart: unless-stopped
