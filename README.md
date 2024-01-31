@@ -13,7 +13,7 @@ poetry run python app/main.py
 ## Build
 ```bash
 poetry export --without-hashes --format requirements.txt > requirements.txt
-docker build -t giahuy2201/gfpgan-webui .
+docker build -t giahuy2201/gfpgan-rocm-webui .
 ```
 
 ## Usage

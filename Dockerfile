@@ -1,4 +1,4 @@
-FROM python:3.9-slim-bookworm
+FROM rocm/pytorch:latest
 WORKDIR /gfpgan-webui
 COPY requirements.txt ./
 RUN apt update && \
