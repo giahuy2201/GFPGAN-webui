@@ -4,6 +4,7 @@ from basicsr.utils import imwrite
 import gradio as gr
 import cv2
 import os
+import torch
 
 from basicsr.archs.rrdbnet_arch import RRDBNet
 from realesrgan import RealESRGANer
@@ -12,16 +13,16 @@ def inference(img):
 
     os.makedirs('outputs', exist_ok=True)
     # ------------------------ set up background upsampler ------------------------
-    # model = RRDBNet(num_in_ch=3, num_out_ch=3, num_feat=64, num_block=23, num_grow_ch=32, scale=2)
-    # bg_upsampler = RealESRGANer(
-    #     scale=2,
-    #     model_path='https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth',
-    #     model=model,
-    #     tile=400,
-    #     tile_pad=10,
-    #     pre_pad=0,
-    #     half=False)  # need to set False in CPU mode
-    bg_upsampler = None
+    model = RRDBNet(num_in_ch=3, num_out_ch=3, num_feat=64, num_block=23, num_grow_ch=32, scale=2)
+    bg_upsampler = RealESRGANer(
+        scale=2,
+        model_path='https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth',
+        model=model,
+        tile=400,
+        tile_pad=10,
+        pre_pad=0,
+        half=True)  # need to set False in CPU mode
+    # bg_upsampler = None
 
     # ------------------------ set up GFPGAN restorer ------------------------
 
@@ -70,5 +71,6 @@ app = gr.Interface(
     ],
     title="GFPGAN",
 )
+print(f'ROCM: {torch.version.hip}')
 app.queue()
 app.launch(server_name="0.0.0.0")
