@@ -5,6 +5,9 @@ services:
     image: giahuy2201/gfpgan-rocm-webui
     container_name: gfpgan
     restart: unless-stopped
+    shm_size: "8G"
+    security_opt:
+      - seccomp:unconfined
     devices:
       - /dev/kfd:/dev/kfd
       - /dev/dri:/dev/dri
