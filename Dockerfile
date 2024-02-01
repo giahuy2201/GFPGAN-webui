@@ -7,4 +7,4 @@ RUN apt update && \
     apt purge -y gcc python3-dev libc-dev libffi-dev && \
     rm -rf /tmp/* $HOME/.cache
 COPY ./app ./app
-CMD [ "python","app/main.py" ]
+CMD [ "python","-u","app/main.py" ]
