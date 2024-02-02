@@ -5,6 +5,7 @@ services:
     image: giahuy2201/gfpgan-rocm-webui
     container_name: gfpgan
     restart: unless-stopped
+    user: ${UID}:messagebus # run container as non-root user with added permission to use gpu through group messagebus (not render for some reason idk)
     shm_size: "8G"
     security_opt:
       - seccomp:unconfined
@@ -14,6 +15,7 @@ services:
     volumes:
       - ./basicsr/degradations.py:/opt/conda/envs/py_3.9/lib/python3.9/site-packages/basicsr/data/degradations.py
       - ./gfpgan:/gfpgan-webui/gfpgan
+      - ./flagged:/gfpgan-webui/flagged # needed when container running as non-root user
       - ./models:/gfpgan-webui/models
       - ./outputs:/gfpgan-webui/outputs
     environment:
