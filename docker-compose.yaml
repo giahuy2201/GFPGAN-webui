@@ -3,11 +3,13 @@ version: '3.6'
 services:
   gfpgan:
     image: giahuy2201/gfpgan-webui
+    user: ${UID}:${GID}
     container_name: gfpgan
     restart: unless-stopped
     volumes:
       - ./gfpgan:/gfpgan-webui/gfpgan
       - ./models:/gfpgan-webui/models
+      - ./flagged:/gfpgan-webui/flagged # needed when running as non-root user
       - ./outputs:/gfpgan-webui/outputs
     ports:
       - 7860:7860
