@@ -26,6 +26,17 @@ def inference(img_path):
     return -1
 
 
+def get_processed_files(n):
+    """
+    Return last n files
+    """
+    paths = sorted(Path("outputs").iterdir(), key=os.path.getmtime)
+    files = []
+    for i in range(n):
+        files.append(str(paths[-(i + 1)]))
+    return files
+
+
 with gr.Blocks(title="GFPGAN") as app:
     gr.Markdown(
         """
@@ -37,6 +48,8 @@ with gr.Blocks(title="GFPGAN") as app:
         output_img = gr.Image(type="numpy", label="Output", min_width=600)
     submit_btn = gr.Button("Submit")
     submit_btn.click(inference, inputs=[input_img], outputs=[output_img])
+
+    prev_files = gr.Files(label="Downloadables", value=get_processed_files(3))
 
 app.queue()
 app.launch(server_name="0.0.0.0")
