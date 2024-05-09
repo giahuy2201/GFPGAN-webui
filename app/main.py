@@ -3,6 +3,7 @@ import gradio as gr
 import numpy as np
 import cv2
 import os
+from pathlib import Path
 
 
 def inference(img_path):
@@ -25,13 +26,17 @@ def inference(img_path):
     return -1
 
 
-app = gr.Interface(
-    inference,
-    [
-        gr.Image(type="filepath", label="Input"),
-    ],
-    [gr.Image(type="numpy", label="Output"), gr.File(label="Downloadable")],
-    title="GFPGAN",
-)
+with gr.Blocks(title="GFPGAN") as app:
+    gr.Markdown(
+        """
+    # GFPGAN
+    """
+    )
+    with gr.Row():
+        input_img = gr.Image(type="filepath", label="Input", min_width=600)
+        output_img = gr.Image(type="numpy", label="Output", min_width=600)
+    submit_btn = gr.Button("Submit")
+    submit_btn.click(inference, inputs=[input_img], outputs=[output_img])
+
 app.queue()
 app.launch(server_name="0.0.0.0")
