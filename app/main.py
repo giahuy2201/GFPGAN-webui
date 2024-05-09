@@ -26,7 +26,7 @@ def inference(img_path):
     return -1
 
 
-def get_processed_files(n):
+def get_processed_files(n=3):
     """
     Return last n files
     """
@@ -46,10 +46,13 @@ with gr.Blocks(title="GFPGAN") as app:
     with gr.Row():
         input_img = gr.Image(type="filepath", label="Input", min_width=600)
         output_img = gr.Image(type="numpy", label="Output", min_width=600)
-    submit_btn = gr.Button("Submit")
+    with gr.Row():
+        submit_btn = gr.Button("Submit", variant="primary", min_width=200)
+        get_btn = gr.Button("Get", min_width=200)
     submit_btn.click(inference, inputs=[input_img], outputs=[output_img])
 
-    prev_files = gr.Files(label="Downloadables", value=get_processed_files(3))
+    prev_files = gr.Files(label="Downloadables", interactive=False)
+    get_btn.click(get_processed_files, outputs=[prev_files])
 
 app.queue()
 app.launch(server_name="0.0.0.0")
