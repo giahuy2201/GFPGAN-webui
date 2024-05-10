@@ -51,7 +51,17 @@ with gr.Blocks(title="GFPGAN") as app:
         get_btn = gr.Button("Get", min_width=200)
     submit_btn.click(inference, inputs=[input_img], outputs=[output_img])
 
-    prev_files = gr.Files(label="Downloadables", interactive=False)
+    prev_files = gr.Gallery(
+        label="Downloadables",
+        show_label=False,
+        elem_id="gallery",
+        columns=[2],
+        rows=[1],
+        object_fit="contain",
+        height="auto",
+        allow_preview=False,
+    )
+
     get_btn.click(get_processed_files, outputs=[prev_files])
 
 app.queue()
