@@ -5,7 +5,7 @@ docker build \
     --platform=linux/amd64 \
     --target runtime-cpu \
     -f Dockerfile \
-    -t giahuy2201:gfpgan-webui \
+    -t giahuy2201/gfpgan-webui \
     .
 echo "Done"
 
@@ -14,6 +14,6 @@ docker build \
     --platform=linux/amd64 \
     --target runtime-rocm \
     -f Dockerfile \
-    -t giahuy2201:gfpgan-rocm-webui \
+    -t giahuy2201/gfpgan-webui:rocm \
     .
 echo "Done"
