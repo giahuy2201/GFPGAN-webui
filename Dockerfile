@@ -9,7 +9,7 @@ RUN apt update && \
 COPY ./app ./app
 CMD [ "python","-u","app/main.py" ]
 
-FROM rocm/pytorch:rocm6.0.2_ubuntu22.04_py3.10_pytorch_2.1.2 as runtime-rocm
+FROM rocm/pytorch:rocm6.1_ubuntu20.04_py3.9_pytorch_2.1.2 as runtime-rocm
 WORKDIR /gfpgan-webui
 COPY requirements.txt ./
 RUN apt update && \
