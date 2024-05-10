@@ -1,5 +1,4 @@
 ---
-version: '3.6'
 services:
   gfpgan:
     image: giahuy2201/gfpgan-rocm-webui
