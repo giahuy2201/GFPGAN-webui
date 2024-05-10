@@ -10,3 +10,4 @@ outputs
 models
 flagged
 requirements.txt
+pyproject.toml

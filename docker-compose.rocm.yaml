@@ -1,0 +1,27 @@
+---
+version: '3.6'
+services:
+  gfpgan:
+    image: giahuy2201/gfpgan-rocm-webui
+    container_name: gfpgan
+    restart: unless-stopped
+    user: ${UID}:messagebus # run container as non-root user with added permission to use gpu through group messagebus (not render for some reason idk)
+    shm_size: "8G"
+    security_opt:
+      - seccomp:unconfined
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
+    volumes:
+      - ./basicsr/degradations.py:/opt/conda/envs/py_3.9/lib/python3.9/site-packages/basicsr/data/degradations.py
+      - ./gfpgan:/gfpgan-webui/gfpgan
+      - ./flagged:/gfpgan-webui/flagged # needed when container running as non-root user
+      - ./models:/gfpgan-webui/models
+      - ./outputs:/gfpgan-webui/outputs
+    environment:
+      - HSA_OVERRIDE_GFX_VERSION=10.3.0
+      - HCC_AMDGPU_TARGET=gfx1030
+      - HIP_VISIBLE_DEVICES=0
+      - ROCM_PATH=/opt/rocm
+    ports:
+      - 7860:7860

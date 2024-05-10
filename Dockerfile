@@ -1,4 +1,4 @@
-FROM python:3.9-slim-bookworm
+FROM rocm/pytorch:rocm6.0.2_ubuntu22.04_py3.10_pytorch_2.1.2 as runtime-rocm
 WORKDIR /gfpgan-webui
 COPY requirements.txt ./
 RUN apt update && \
