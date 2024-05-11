@@ -11,3 +11,4 @@ models
 flagged
 requirements.txt
 pyproject.toml
+docker-compose.yaml
