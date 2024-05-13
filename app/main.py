@@ -22,7 +22,7 @@ def inference(img_path):
         restored_img = cv2.imread(restored_img_path)
         restored_img = cv2.cvtColor(restored_img, cv2.COLOR_BGR2RGB)
         print(f"Finished {restored_img_path}")
-        return restored_img, restored_img_path
+        return restored_img
     return -1
 
 
