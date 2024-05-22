@@ -18,7 +18,7 @@ poetry install --no-root
 
 ## Build Docker images
 
-Details could be found in `scripts/build_docker.sh` file
+Details could be found in `scripts/build_docker_*.sh` file
 
 ## Usage
 
