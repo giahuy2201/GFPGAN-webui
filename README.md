@@ -36,3 +36,5 @@ Rename the corresponding `docker-compose.*.yaml` file of your target runtime to 
 ```bash
 docker compose up -d
 ```
+
+> Note that the ROCm image is massive, almost 20GB when compressed and 60GB to store locally. The CPU-only image is available on Docker Hub, but a image build is required to run ROCm version.
