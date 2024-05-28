@@ -1,6 +1,15 @@
 # GFPGAN-webui
 
-Based on the [original GFPGAN](https://github.com/TencentARC/GFPGAN), tailored for my use case
+Based on the [original GFPGAN](https://github.com/TencentARC/GFPGAN), built with gradio, tailored for my use case
+
+- Simple to use, one-click inference
+- Could take advantage of AMD GPU and be able to release the it to save power after each run
+- Allow retrieval of previously processed images in case of connection failure
+- Easy deployment and replication through Docker image
+
+Web UI screenshot
+
+![webui](screenshot.png)
 
 ## Development
 
