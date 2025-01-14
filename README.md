@@ -27,7 +27,25 @@ poetry install --no-root
 
 ## Build Docker images
 
-Details could be found in `scripts/build_docker_*.sh` file
+[Poetry package manager](https://python-poetry.org/) is required to generate a `requirements.txt` file for docker build.
+
+Install the export plugin
+
+```bash
+poetry self add poetry-plugin-export
+```
+
+Build with ROCm
+
+```bash
+./scripts/build_docker_rocm.sh`
+```
+
+Or with CPU-only
+
+```bash
+./scripts/build_docker_cpu.sh`
+```
 
 ## Usage
 
