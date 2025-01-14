@@ -1,4 +1,4 @@
-FROM python:3.9-slim-bookworm as runtime-cpu
+FROM python:3.9-slim-bookworm AS runtime-cpu
 WORKDIR /gfpgan-webui
 COPY requirements.txt ./
 RUN apt update && \
@@ -9,7 +9,7 @@ RUN apt update && \
 COPY ./app ./app
 CMD [ "python","-u","app/main.py" ]
 
-FROM rocm/pytorch:rocm6.1_ubuntu20.04_py3.9_pytorch_2.1.2 as runtime-rocm
+FROM rocm/pytorch:rocm6.1_ubuntu20.04_py3.9_pytorch_2.1.2 AS runtime-rocm
 WORKDIR /gfpgan-webui
 COPY requirements.txt ./
 RUN apt update && \
