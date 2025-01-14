@@ -8,6 +8,8 @@ import sys
 
 # ------------------------ set up background upsampler ------------------------
 
+withGPU = True if 'ROCM_PATH' in os.environ else False
+
 model = RRDBNet(
     num_in_ch=3, num_out_ch=3, num_feat=64, num_block=23, num_grow_ch=32, scale=2
 )
@@ -18,7 +20,7 @@ bg_upsampler = RealESRGANer(
     tile=400,
     tile_pad=10,
     pre_pad=0,
-    half=True,
+    half=withGPU,
 )  # need to set False in CPU mode
 # bg_upsampler = None
 
