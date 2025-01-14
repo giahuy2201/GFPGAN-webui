@@ -2,7 +2,6 @@
 services:
   gfpgan:
     image: giahuy2201/gfpgan-webui
-    user: ${UID}:${GID}
     container_name: gfpgan
     restart: unless-stopped
     volumes:
