@@ -5,10 +5,8 @@ services:
     container_name: gfpgan
     restart: unless-stopped
     volumes:
-      - ./basicsr/degradations.py:/usr/local/lib/python3.9/site-packages/basicsr/data/degradations.py
-      - ./gfpgan:/gfpgan-webui/gfpgan
-      - ./models:/gfpgan-webui/models
-      - ./flagged:/gfpgan-webui/flagged # needed when running as non-root user
+      - ./basicsr/degradations.py:/usr/local/lib/python3.9/site-packages/basicsr/data/degradations.py # fix torchvision.transforms.functional_tensor
+      - ./weights:/usr/local/lib/python3.9/site-packages/gfpgan/weights # save model files
       - ./outputs:/gfpgan-webui/outputs
     ports:
       - 7860:7860
