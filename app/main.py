@@ -7,8 +7,11 @@ from pathlib import Path
 
 
 def inference(img_path):
+    return runTask('gpen',img_path)
+
+def runTask(model, img_path, task='restore'):
     # do the inference in a seperate process to avoid high gpu idle power consumption of pytorch
-    p = Popen(["python", "app/inference.py", img_path], stdout=PIPE, stderr=PIPE)
+    p = Popen(["python", "app/%s.py" % model, img_path, task], stdout=PIPE, stderr=PIPE)
     stdout, stderr = p.communicate()
     print("stdout:\n", stdout)
     print("stderr:\n", stderr)
@@ -17,7 +20,7 @@ def inference(img_path):
     img_name = os.path.basename(img_path)
     basename, ext = os.path.splitext(img_name)
     extension = ext[1:]
-    restored_img_path = os.path.join("outputs", f"{basename}_fixed.{extension}")
+    restored_img_path = os.path.join("outputs", f"{basename}_{model}_{task}.{extension}")
     if os.path.isfile(restored_img_path):
         restored_img = cv2.imread(restored_img_path)
         restored_img = cv2.cvtColor(restored_img, cv2.COLOR_BGR2RGB)
