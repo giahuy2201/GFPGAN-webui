@@ -6,6 +6,9 @@ import cv2
 import os
 import sys
 
+RealESRGAN_URL = "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth"
+GFPGAN_URL = "https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.4.pth"
+
 # ------------------------ set up background upsampler ------------------------
 
 withGPU = True if 'ROCM_PATH' in os.environ else False
@@ -15,7 +18,7 @@ model = RRDBNet(
 )
 bg_upsampler = RealESRGANer(
     scale=2,
-    model_path="https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth",
+    model_path=RealESRGAN_URL,
     model=model,
     tile=400,
     tile_pad=10,
@@ -26,12 +29,8 @@ bg_upsampler = RealESRGANer(
 
 # ------------------------ set up GFPGAN restorer ------------------------
 
-# determine model paths
-model_name = "GFPGANv1.4"
-model_path = os.path.join("models/", model_name + ".pth")
-
 restorer = GFPGANer(
-    model_path=model_path,
+    model_path=GFPGAN_URL,
     upscale=2,
     arch="clean",
     channel_multiplier=2,
