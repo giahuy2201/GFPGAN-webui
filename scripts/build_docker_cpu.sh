@@ -1,8 +1,5 @@
 poetry export --without-hashes --format requirements.txt > requirements.txt
 
-echo "Pulling base Docker image"
-docker pull python:3.9-slim-bookworm
-
 echo "Building cpu-only Docker image"
 docker build \
     --platform=linux/amd64 \
