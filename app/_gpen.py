@@ -12,16 +12,15 @@ from face_colorization import FaceColorization
 task = sys.argv[2]
 img_path = sys.argv[1]  # read input image from argv
 img_name = os.path.basename(img_path)
-print(f"Started GPEN {task} {img_name} ...")
 basename, ext = os.path.splitext(img_name)
 img_in = cv2.imread(img_path, cv2.IMREAD_COLOR)
 
 
 def colorize(img_in):
     params_dict = {
-        "in_size": 512,
-        "model": "GPEN-BFR-512",
-        "use_sr": True,
+        "in_size": 1024,
+        "model": "GPEN-Colorization-1024",
+        "use_sr": False,
         "device": "cpu",
         "channel_multiplier": 2,
         "narrow": 1,
@@ -30,7 +29,7 @@ def colorize(img_in):
         "sr_model": "realesrnet",
         "tile_size": 0,
         "alpha": 1,
-        "aligned": "store_true",
+        "aligned": True,
     }
     params = SimpleNamespace(**params_dict)
     processor = FaceColorization(
@@ -44,9 +43,9 @@ def colorize(img_in):
 
 def restore(img_in):
     params_dict = {
-        "in_size": 1024,
-        "model": "GPEN-Colorization-1024",
-        "use_sr": False,
+        "in_size": 512,
+        "model": "GPEN-BFR-512",
+        "use_sr": True,
         "device": "cpu",
         "channel_multiplier": 2,
         "narrow": 1,
@@ -55,7 +54,7 @@ def restore(img_in):
         "sr_model": "realesrnet",
         "tile_size": 0,
         "alpha": 1,
-        "aligned": "store_true",
+        "aligned": True,
     }
     params = SimpleNamespace(**params_dict)
     processor = FaceEnhancement(

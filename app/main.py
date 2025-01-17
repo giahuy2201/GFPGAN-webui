@@ -17,12 +17,16 @@ def inference_gpen(img_path, task):
 def run_task(model, img_path, task="restore"):
     # do the inference in a seperate process to avoid high gpu idle power consumption of pytorch
     p = Popen(["python", "app/%s.py" % model, img_path, task], stdout=PIPE, stderr=PIPE)
+    # info
+    img_name = os.path.basename(img_path)
+    basename, ext = os.path.splitext(img_name)
+    model = model.strip("_")
+    print(f"Started {model.upper()} {task} {img_name} ...")
+    # wait for it to finish
     stdout, stderr = p.communicate()
     print("stdout:\n", stdout)
     print("stderr:\n", stderr)
     # retrieved the restored image
-    img_name = os.path.basename(img_path)
-    basename, ext = os.path.splitext(img_name)
     extension = ext[1:]
     restored_img_path = os.path.join(
         "outputs", f"{basename}_{model}_{task}.{extension}"
@@ -32,7 +36,9 @@ def run_task(model, img_path, task="restore"):
         restored_img = cv2.cvtColor(restored_img, cv2.COLOR_BGR2RGB)
         print(f"Finished {model.upper()} {task} {restored_img_path}")
         return restored_img
-    return -1
+    else:
+        gr.Error("Result not found!")
+    return None
 
 
 def get_processed_files(n=4):
@@ -88,7 +94,9 @@ with gr.Blocks(title="GPEN") as GPEN_app:
         )
         output_img = gr.Image(type="numpy", label="Output", min_width=600)
     with gr.Row():
-        task_radio = gr.Radio(["colorize", "enhance"], label="Task")
+        task_radio = gr.Radio(
+            choices=["colorize", "restore"], label="Task", value="colorize"
+        )
         submit_btn = gr.Button("Submit", variant="primary", min_width=200)
 
     submit_btn.click(

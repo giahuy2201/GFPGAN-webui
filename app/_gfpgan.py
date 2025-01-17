@@ -43,7 +43,6 @@ restorer = GFPGANer(
 task = sys.argv[2]
 img_path = sys.argv[1]  # read input image from argv
 img_name = os.path.basename(img_path)
-print(f"Started GFPGAN {task} {img_name} ...")
 basename, ext = os.path.splitext(img_name)
 input_img = cv2.imread(img_path, cv2.IMREAD_COLOR)
 
