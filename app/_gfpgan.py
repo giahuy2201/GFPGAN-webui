@@ -6,12 +6,13 @@ import cv2
 import os
 import sys
 
-RealESRGAN_URL = "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth"
-GFPGAN_URL = "https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.4.pth"
+WEIGHTS_PATH = "/gfpgan-webui/weights"
+RealESRGAN_URL = "%s/RealESRGAN_x2plus.pth" % WEIGHTS_PATH
+GFPGAN_URL = "%s/GFPGANv1.4.pth" % WEIGHTS_PATH
 
 # ------------------------ set up background upsampler ------------------------
 
-withGPU = True if 'ROCM_PATH' in os.environ else False
+withGPU = True if "ROCM_PATH" in os.environ else False
 
 model = RRDBNet(
     num_in_ch=3, num_out_ch=3, num_feat=64, num_block=23, num_grow_ch=32, scale=2
