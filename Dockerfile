@@ -9,7 +9,6 @@ RUN apt purge -y gcc python3-dev libc-dev libsm6 libxrender1 git && \
     apt autoremove -y && \
     rm -rf /tmp/* $HOME/.cache/*
 COPY ./app ./app
-COPY ./gpen/__init__.py ./GPEN
 CMD [ "python","-u","app/main.py" ]
 
 FROM rocm/pytorch:rocm6.1_ubuntu20.04_py3.9_pytorch_2.1.2 AS runtime-rocm
