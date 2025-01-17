@@ -55,17 +55,15 @@ def get_processed_files(n=4):
 with gr.Blocks(title="GFPGAN") as GFPGAN_app:
     gr.Markdown(
         """
-    # GFPGAN
+    # Generative Facial Prior GAN
     """
     )
     with gr.Row():
-        input_img = gr.Image(
-            type="filepath", label="Input", min_width=600, sources=["upload"]
-        )
-        output_img = gr.Image(type="numpy", label="Output", min_width=600)
+        input_img = gr.Image(type="filepath", label="Input")
+        output_img = gr.Image(type="numpy", label="Output")
     with gr.Row():
-        submit_btn = gr.Button("Submit", variant="primary", min_width=200)
-        get_btn = gr.Button("Get", min_width=200)
+        submit_btn = gr.Button("Submit", variant="primary")
+        get_btn = gr.Button("Get")
 
     prev_files = gr.Gallery(
         label="Downloadables",
@@ -85,19 +83,17 @@ with gr.Blocks(title="GFPGAN") as GFPGAN_app:
 with gr.Blocks(title="GPEN") as GPEN_app:
     gr.Markdown(
         """
-    # GPEN
+    # GAN Prior Embedded Network
     """
     )
     with gr.Row():
-        input_img = gr.Image(
-            type="filepath", label="Input", min_width=600, sources=["upload"]
-        )
-        output_img = gr.Image(type="numpy", label="Output", min_width=600)
+        input_img = gr.Image(type="filepath", label="Input")
+        output_img = gr.Image(type="numpy", label="Output")
     with gr.Row():
         task_radio = gr.Radio(
             choices=["colorize", "restore"], label="Task", value="colorize"
         )
-        submit_btn = gr.Button("Submit", variant="primary", min_width=200)
+        submit_btn = gr.Button("Submit", variant="primary")
 
     submit_btn.click(
         inference_gpen, inputs=[input_img, task_radio], outputs=[output_img]
