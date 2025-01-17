@@ -2,6 +2,7 @@ from basicsr.utils.download_util import load_file_from_url
 import cv2
 import os, sys
 from types import SimpleNamespace
+from _utils import resize_image
 
 # Add the custom directory to sys.path
 sys.path.append("/gfpgan-webui/GPEN")
@@ -64,6 +65,8 @@ def restore(img_in):
         use_sr=params.use_sr,
         device=params.device,
     )
+    # downsize input image
+    img_in = resize_image(img_in)
     img_out, orig_faces, enhanced_faces = processor.process(
         img_in, aligned=params.aligned
     )
