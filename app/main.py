@@ -47,7 +47,7 @@ def get_processed_files(n=4):
     """
     paths = sorted(Path("outputs").iterdir(), key=os.path.getmtime)
     files = []
-    for i in range(n):
+    for i in range(min(n,len(paths))):
         files.append(str(paths[-(i + 1)]))
     return files
 
