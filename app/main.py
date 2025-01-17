@@ -7,11 +7,11 @@ from pathlib import Path
 
 
 def inference_gfpgan(img_path):
-    return run_task("gfpgan", img_path)
+    return run_task("_gfpgan", img_path)
 
 
 def inference_gpen(img_path, task):
-    return run_task("gpen", img_path, task)
+    return run_task("_gpen", img_path, task)
 
 
 def run_task(model, img_path, task="restore"):
