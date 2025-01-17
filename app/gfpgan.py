@@ -40,9 +40,10 @@ restorer = GFPGANer(
 # ------------------------ restore ------------------------
 
 # read image
+task = sys.argv[2]
 img_path = sys.argv[1]  # read input image from argv
 img_name = os.path.basename(img_path)
-print(f"Processing {img_name} ...")
+print(f"Started GFPGAN {task} {img_name} ...")
 basename, ext = os.path.splitext(img_name)
 input_img = cv2.imread(img_path, cv2.IMREAD_COLOR)
 
@@ -55,5 +56,5 @@ cropped_faces, restored_faces, restored_img = restorer.enhance(
 if restored_img is not None:
     extension = ext[1:]
     os.makedirs("outputs", exist_ok=True)
-    save_restore_path = os.path.join("outputs", f"{basename}_fixed.{extension}")
+    save_restore_path = os.path.join("outputs", f"{basename}_gfpgan_{task}.{extension}")
     imwrite(restored_img, save_restore_path)
