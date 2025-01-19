@@ -36,6 +36,12 @@ Install the export plugin
 poetry self add poetry-plugin-export
 ```
 
+Lock dependencies
+
+```bash
+poetry lock
+```
+
 Build with ROCm
 
 ```bash
