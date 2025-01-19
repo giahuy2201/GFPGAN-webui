@@ -1,4 +1,3 @@
-from basicsr.utils.download_util import load_file_from_url
 import cv2
 import os, sys
 from types import SimpleNamespace
@@ -8,6 +7,9 @@ from _utils import resize_image
 sys.path.append("/gfpgan-webui/GPEN")
 from face_enhancement import FaceEnhancement
 from face_colorization import FaceColorization
+
+# check for gpu
+withGPU = True if "ROCM_PATH" in os.environ else False
 
 # read image
 resize = sys.argv[3]
@@ -23,7 +25,7 @@ def colorize(img_in):
         "in_size": 1024,
         "model": "GPEN-Colorization-1024",
         "use_sr": False,
-        "device": "cpu",
+        "device": "cuda" if withGPU else "cpu",
         "channel_multiplier": 2,
         "narrow": 1,
         "sr_scale": 4,
@@ -48,7 +50,7 @@ def restore(img_in):
         "in_size": 512,
         "model": "GPEN-BFR-512",
         "use_sr": True,
-        "device": "cpu",
+        "device": "cuda" if withGPU else "cpu",
         "channel_multiplier": 2,
         "narrow": 1,
         "sr_scale": 4,

@@ -1,4 +1,3 @@
-from basicsr.utils import imwrite
 from basicsr.archs.rrdbnet_arch import RRDBNet
 from realesrgan import RealESRGANer
 from gfpgan import GFPGANer
@@ -62,4 +61,4 @@ if restored_img is not None:
     extension = ext[1:]
     os.makedirs("outputs", exist_ok=True)
     save_restore_path = os.path.join("outputs", f"{basename}_gfpgan_{task}.{extension}")
-    imwrite(restored_img, save_restore_path)
+    cv2.imwrite(save_restore_path, restored_img)
