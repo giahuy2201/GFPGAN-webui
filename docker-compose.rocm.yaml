@@ -1,10 +1,10 @@
 ---
 services:
   gfpgan:
-    image: giahuy2201/gfpgan-rocm-webui
-    container_name: gfpgan
+    image: giahuy2201/gfpgan-webui:rocm
+    container_name: gfpgan-rocm
     restart: unless-stopped
-    user: ${UID}:messagebus # run container as non-root user with added permission to use gpu through group messagebus (not render for some reason idk)
+    # user: 1000:messagebus # run container as non-root user with added permission to use gpu through group messagebus (not render for some reason idk)
     shm_size: "8G"
     security_opt:
       - seccomp:unconfined
@@ -12,10 +12,8 @@ services:
       - /dev/kfd:/dev/kfd
       - /dev/dri:/dev/dri
     volumes:
-      - ./basicsr/degradations.py:/opt/conda/envs/py_3.9/lib/python3.9/site-packages/basicsr/data/degradations.py
-      - ./gfpgan:/gfpgan-webui/gfpgan
-      - ./flagged:/gfpgan-webui/flagged # needed when container running as non-root user
-      - ./models:/gfpgan-webui/models
+      - ./basicsr/degradations.py:/opt/conda/envs/py_3.9/lib/python3.9/site-packages/basicsr/data/degradations.py # fix torchvision.transforms.functional_tensor
+      - ./weights:/gfpgan-webui/weights
       - ./outputs:/gfpgan-webui/outputs
     environment:
       - HSA_OVERRIDE_GFX_VERSION=10.3.0
