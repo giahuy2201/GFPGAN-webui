@@ -1,8 +1,8 @@
 import cv2
 
-def resize_image(image, max_size=720):
+def resize_image(image, max_size=1200):
     """
-    Resize the image so both sides are less than or equal to max_size while maintaining the aspect ratio
+    Resize the image to half original size while maintaining the aspect ratio
     """
     height, width = image.shape[:2]
 
@@ -10,8 +10,8 @@ def resize_image(image, max_size=720):
     if height <= max_size and width <= max_size:
         return image  # No resizing needed
 
-    # Calculate the scaling factor
-    scale_factor = min(max_size / height, max_size / width)
+    # Set it to half original size
+    scale_factor = 0.5
 
     # Calculate new dimensions
     new_width = int(width * scale_factor)

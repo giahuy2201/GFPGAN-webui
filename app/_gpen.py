@@ -10,6 +10,7 @@ from face_enhancement import FaceEnhancement
 from face_colorization import FaceColorization
 
 # read image
+resize = sys.argv[3]
 task = sys.argv[2]
 img_path = sys.argv[1]  # read input image from argv
 img_name = os.path.basename(img_path)
@@ -66,7 +67,8 @@ def restore(img_in):
         device=params.device,
     )
     # downsize input image
-    img_in = resize_image(img_in)
+    if resize == "on":
+        img_in = resize_image(img_in)
     img_out, orig_faces, enhanced_faces = processor.process(
         img_in, aligned=params.aligned
     )

@@ -42,13 +42,15 @@ restorer = GFPGANer(
 # ------------------------ restore ------------------------
 
 # read image
+resize = sys.argv[3]
 task = sys.argv[2]
 img_path = sys.argv[1]  # read input image from argv
 img_name = os.path.basename(img_path)
 basename, ext = os.path.splitext(img_name)
 input_img = cv2.imread(img_path, cv2.IMREAD_COLOR)
 # downsize input image
-input_img = resize_image(input_img)
+if resize == "on":
+    input_img = resize_image(input_img)
 
 # restore faces and background if necessary
 cropped_faces, restored_faces, restored_img = restorer.enhance(

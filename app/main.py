@@ -6,17 +6,17 @@ import os
 from pathlib import Path
 
 
-def inference_gfpgan(img_path):
-    return run_task("_gfpgan", img_path)
+def inference_gfpgan(img_path, resize):
+    return run_task("_gfpgan", img_path, resize=resize)
 
 
 def inference_gpen(img_path, task):
-    return run_task("_gpen", img_path, task)
+    return run_task("_gpen", img_path, task=task)
 
 
-def run_task(model, img_path, task="restore"):
+def run_task(model, img_path, task="restore", resize="on"):
     # do the inference in a seperate process to avoid high gpu idle power consumption of pytorch
-    p = Popen(["python", "app/%s.py" % model, img_path, task], stdout=PIPE, stderr=PIPE)
+    p = Popen(["python", "app/%s.py" % model, img_path, task, resize], stdout=PIPE, stderr=PIPE)
     # info
     img_name = os.path.basename(img_path)
     basename, ext = os.path.splitext(img_name)
@@ -62,6 +62,9 @@ with gr.Blocks(title="GFPGAN") as GFPGAN_app:
         input_img = gr.Image(type="filepath", label="Input")
         output_img = gr.Image(type="numpy", label="Output")
     with gr.Row():
+        resize_radio = gr.Radio(
+            choices=["on", "off"], label="Resize", value="on"
+        )
         submit_btn = gr.Button("Submit", variant="primary")
         get_btn = gr.Button("Get")
 
@@ -76,7 +79,7 @@ with gr.Blocks(title="GFPGAN") as GFPGAN_app:
         allow_preview=False,
     )
 
-    submit_btn.click(inference_gfpgan, inputs=[input_img], outputs=[output_img])
+    submit_btn.click(inference_gfpgan, inputs=[input_img,resize_radio], outputs=[output_img])
     get_btn.click(get_processed_files, outputs=[prev_files])
 
 
