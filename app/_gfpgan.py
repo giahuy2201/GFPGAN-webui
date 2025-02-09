@@ -12,7 +12,7 @@ GFPGAN_URL = "%s/GFPGANv1.4.pth" % WEIGHTS_PATH
 
 # ------------------------ set up background upsampler ------------------------
 
-withGPU = True if "ROCM_PATH" in os.environ else False
+withGPU = True if "WITH_GPU" in os.environ else False
 
 model = RRDBNet(
     num_in_ch=3, num_out_ch=3, num_feat=64, num_block=23, num_grow_ch=32, scale=2

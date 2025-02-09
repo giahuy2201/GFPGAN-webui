@@ -20,5 +20,6 @@ services:
       - HCC_AMDGPU_TARGET=gfx1030
       - HIP_VISIBLE_DEVICES=0
       - ROCM_PATH=/opt/rocm
+      - WITH_GPU=yes
     ports:
       - 7860:7860
