@@ -1,0 +1,21 @@
+---
+services:
+  gfpgan:
+    image: giahuy2201/gfpgan-webui:cuda
+    container_name: gfpgan-cuda
+    restart: unless-stopped
+    volumes:
+      - ./basicsr/degradations.py:/usr/local/lib/python3.10/dist-packages/basicsr/data/degradations.py # fix torchvision.transforms.functional_tensor
+      - ./weights:/gfpgan-webui/weights # save model files
+      - ./outputs:/gfpgan-webui/outputs
+    environment:
+      - WITH_GPU=yes
+    ports:
+      - 7860:7860
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

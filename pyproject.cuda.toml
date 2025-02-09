@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "gfpgan-webui"
+version = "0.1.0"
+description = ""
+authors = ["Huy Nguyen <giahuy2201@icloud.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+gfpgan = "^1.3.8"
+gradio = "^4.29.0"
+realesrgan = "^0.3.0"
+opencv-python = "^4.9.0.80"
+torch = "^2.5.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
