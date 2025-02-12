@@ -9,7 +9,7 @@ from face_enhancement import FaceEnhancement
 from face_colorization import FaceColorization
 
 # check for gpu
-withGPU = True if "ROCM_PATH" in os.environ else False
+withGPU = True if "WITH_GPU" in os.environ else False
 
 # read image
 resize = sys.argv[3]
