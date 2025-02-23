@@ -1,5 +1,6 @@
 import cv2
 import os, sys
+import torch
 from types import SimpleNamespace
 from _utils import resize_image
 
@@ -9,7 +10,7 @@ from face_enhancement import FaceEnhancement
 from face_colorization import FaceColorization
 
 # check for gpu
-withGPU = True if "WITH_GPU" in os.environ else False
+withGPU = True if torch.cuda.is_available() else False
 
 # read image
 resize = sys.argv[3]

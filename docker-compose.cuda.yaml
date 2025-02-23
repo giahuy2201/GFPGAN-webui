@@ -8,8 +8,6 @@ services:
       - ./basicsr/degradations.py:/usr/local/lib/python3.10/dist-packages/basicsr/data/degradations.py # fix torchvision.transforms.functional_tensor
       - ./weights:/gfpgan-webui/weights # save model files
       - ./outputs:/gfpgan-webui/outputs
-    environment:
-      - WITH_GPU=yes
     ports:
       - 7860:7860
     deploy:
