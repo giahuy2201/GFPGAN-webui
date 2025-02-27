@@ -48,6 +48,12 @@ Build with ROCm
 ./scripts/build_docker_rocm.sh`
 ```
 
+Or with CUDA
+
+```bash
+./scripts/build_docker_cuda.sh`
+```
+
 Or with CPU-only
 
 ```bash
