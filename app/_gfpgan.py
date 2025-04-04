@@ -7,9 +7,9 @@ import os
 import sys
 from _utils import resize_image
 
-WEIGHTS_PATH = "/gfpgan-webui/weights"
-RealESRGAN_URL = "%s/RealESRGAN_x2plus.pth" % WEIGHTS_PATH
-GFPGAN_URL = "%s/GFPGANv1.4.pth" % WEIGHTS_PATH
+MODELS_PATH = "/gfpgan-webui/models"
+RealESRGAN_URL = "%s/RealESRGAN_x2plus.pth" % MODELS_PATH
+GFPGAN_URL = "%s/GFPGANv1.4.pth" % MODELS_PATH
 
 # ------------------------ set up background upsampler ------------------------
 

@@ -13,7 +13,7 @@ services:
       - /dev/dri:/dev/dri
     volumes:
       - ./basicsr/degradations.py:/opt/conda/envs/py_3.9/lib/python3.9/site-packages/basicsr/data/degradations.py # fix torchvision.transforms.functional_tensor
-      - ./weights:/gfpgan-webui/weights
+      - ./models:/gfpgan-webui/models
       - ./outputs:/gfpgan-webui/outputs
     environment:
       - HSA_OVERRIDE_GFX_VERSION=10.3.0

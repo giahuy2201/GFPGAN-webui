@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./basicsr/degradations.py:/usr/local/lib/python3.9/site-packages/basicsr/data/degradations.py # fix torchvision.transforms.functional_tensor
-      - ./weights:/gfpgan-webui/weights # save model files
+      - ./models:/gfpgan-webui/models # save model files
       - ./outputs:/gfpgan-webui/outputs
     ports:
       - 7860:7860

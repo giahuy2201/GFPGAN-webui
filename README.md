@@ -62,7 +62,7 @@ Or with CPU-only
 
 ## Usage
 
-Download all models to `./weights` directory
+Download all models to `./models` directory
 
 ```bash
 ./scripts/download_models.sh

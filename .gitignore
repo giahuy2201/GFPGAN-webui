@@ -7,7 +7,7 @@ __pycache__
 .venv
 inputs
 outputs
-weights
+models
 requirements.txt
 pyproject.toml
 docker-compose.yaml
